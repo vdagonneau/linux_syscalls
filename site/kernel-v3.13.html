@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Kernel v3.13: syscalls</title>
+
+    <style>
+      .code { font-family: Monospace; }
+      .type { font-weight: bold; }
+      .name { color: green; }
+    </style>
+  </head>
+  <body>
+    
+<h1>Kernel v3.13: syscalls</h1>
+
+<table>
+  
+    <tr>
+      <td>access</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>acct</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>adjtimex</td>
+      
+        <td class="code"><span class="type"> struct timex __user *</span> <span class="name"> txc_p</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>alarm</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> seconds</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>bdflush</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> func</span></td>
+      
+        <td class="code"><span class="type"> long</span> <span class="name"> data</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>bind</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> struct sockaddr __user *</span> <span class="name"> umyaddr</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> addrlen</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>brk</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> brk</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>capget</td>
+      
+        <td class="code"><span class="type"> cap_user_header_t</span> <span class="name"> header</span></td>
+      
+        <td class="code"><span class="type"> cap_user_data_t</span> <span class="name"> dataptr</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>capset</td>
+      
+        <td class="code"><span class="type"> cap_user_header_t</span> <span class="name"> header</span></td>
+      
+        <td class="code"><span class="type"> const cap_user_data_t</span> <span class="name"> data</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>chdir</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>chmod</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>chown16</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> user</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> group</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>chown</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> user</span></td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> group</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>chroot</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>close</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>creat</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>dup2</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> oldfd</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> newfd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>dup3</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> oldfd</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> newfd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>dup</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fildes</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>epoll_create1</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>epoll_create</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> size</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>eventfd2</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> count</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>eventfd</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> count</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>exit_group</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> error_code</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>exit</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> error_code</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>faccessat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> dfd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fadvise64_64</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> len</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> advice</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fadvise64</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> advice</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fallocate</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> mode</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fanotify_init</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> flags</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> event_f_flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fchdir</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fchmodat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> dfd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fchmod</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fchown16</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> user</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> group</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fchown</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> user</span></td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> group</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fcntl</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> cmd</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> arg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fdatasync</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>finit_module</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> uargs</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>flistxattr</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> list</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> size</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>flock</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> cmd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fork</td>
+      
+    </tr>
+  
+    <tr>
+      <td>fremovexattr</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fstat64</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> struct stat64 __user *</span> <span class="name"> statbuf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fstatfs64</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> sz</span></td>
+      
+        <td class="code"><span class="type"> struct statfs64 __user *</span> <span class="name"> buf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fstatfs</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> struct statfs __user *</span> <span class="name"> buf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fstat</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> struct __old_kernel_stat __user *</span> <span class="name"> statbuf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>fsync</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ftruncate64</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> length</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ftruncate</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> compat_ulong_t</span> <span class="name"> length</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ftruncate</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> length</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getcwd</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> buf</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> size</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getegid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getegid16</td>
+      
+    </tr>
+  
+    <tr>
+      <td>geteuid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>geteuid16</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getgid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getgid16</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getgroups16</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> gidsetsize</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t __user *</span> <span class="name"> grouplist</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getgroups</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> gidsetsize</span></td>
+      
+        <td class="code"><span class="type"> gid_t __user *</span> <span class="name"> grouplist</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>gethostname</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> name</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getitimer</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> which</span></td>
+      
+        <td class="code"><span class="type"> struct itimerval __user *</span> <span class="name"> value</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getpgid</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getpgrp</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getpid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getppid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getpriority</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> which</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> who</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getresgid16</td>
+      
+        <td class="code"><span class="type"> old_gid_t __user *</span> <span class="name"> rgidp</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t __user *</span> <span class="name"> egidp</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t __user *</span> <span class="name"> sgidp</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getresgid</td>
+      
+        <td class="code"><span class="type"> gid_t __user *</span> <span class="name"> rgidp</span></td>
+      
+        <td class="code"><span class="type"> gid_t __user *</span> <span class="name"> egidp</span></td>
+      
+        <td class="code"><span class="type"> gid_t __user *</span> <span class="name"> sgidp</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getresuid16</td>
+      
+        <td class="code"><span class="type"> old_uid_t __user *</span> <span class="name"> ruidp</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t __user *</span> <span class="name"> euidp</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t __user *</span> <span class="name"> suidp</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getresuid</td>
+      
+        <td class="code"><span class="type"> uid_t __user *</span> <span class="name"> ruidp</span></td>
+      
+        <td class="code"><span class="type"> uid_t __user *</span> <span class="name"> euidp</span></td>
+      
+        <td class="code"><span class="type"> uid_t __user *</span> <span class="name"> suidp</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getrlimit</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> resource</span></td>
+      
+        <td class="code"><span class="type"> struct rlimit __user *</span> <span class="name"> rlim</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getrusage</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> who</span></td>
+      
+        <td class="code"><span class="type"> struct compat_rusage __user *</span> <span class="name"> ru</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getrusage</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> who</span></td>
+      
+        <td class="code"><span class="type"> struct rusage __user *</span> <span class="name"> ru</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>getsid</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>gettid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getuid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>getuid16</td>
+      
+    </tr>
+  
+    <tr>
+      <td>inotify_init</td>
+      
+    </tr>
+  
+    <tr>
+      <td>inotify_init1</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>inotify_rm_watch</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> __s32</span> <span class="name"> wd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ioctl</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> cmd</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> arg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>io_destroy</td>
+      
+        <td class="code"><span class="type"> aio_context_t</span> <span class="name"> ctx</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ioprio_get</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> which</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> who</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ioprio_set</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> which</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> who</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> ioprio</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>io_setup</td>
+      
+        <td class="code"><span class="type"> unsigned</span> <span class="name"> nr_events</span></td>
+      
+        <td class="code"><span class="type"> aio_context_t __user *</span> <span class="name"> ctxp</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>kill</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> sig</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>lchown16</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> user</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> group</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>lchown</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> user</span></td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> group</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>link</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> oldname</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> newname</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>listen</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> backlog</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>lookup_dcookie</td>
+      
+        <td class="code"><span class="type"> u32</span> <span class="name"> w0</span></td>
+      
+        <td class="code"><span class="type"> u32</span> <span class="name"> w1</span></td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> buf</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>lookup_dcookie</td>
+      
+        <td class="code"><span class="type"> u64</span> <span class="name"> cookie64</span></td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> buf</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>lseek</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> compat_off_t</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> whence</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>lseek</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> off_t</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> whence</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>madvise</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> start</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len_in</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> behavior</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>mkdirat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> dfd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>mkdir</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>mknod</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+        <td class="code"><span class="type"> unsigned</span> <span class="name"> dev</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>mlockall</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>mlock</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> start</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>mq_unlink</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> u_name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>msgctl</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> msqid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> cmd</span></td>
+      
+        <td class="code"><span class="type"> struct msqid_ds __user *</span> <span class="name"> buf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>msgget</td>
+      
+        <td class="code"><span class="type"> key_t</span> <span class="name"> key</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> msgflg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>msync</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> start</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>munlockall</td>
+      
+    </tr>
+  
+    <tr>
+      <td>munlock</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> start</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>munmap</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> addr</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>newfstat</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> struct stat __user *</span> <span class="name"> statbuf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>newuname</td>
+      
+        <td class="code"><span class="type"> struct new_utsname __user *</span> <span class="name"> name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>nice</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> increment</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>old_mmap</td>
+      
+        <td class="code"><span class="type"> struct mmap_arg_struct __user *</span> <span class="name"> arg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>old_select</td>
+      
+        <td class="code"><span class="type"> struct sel_arg_struct __user *</span> <span class="name"> arg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>oldumount</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>olduname</td>
+      
+        <td class="code"><span class="type"> struct oldold_utsname __user *</span> <span class="name"> name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>openat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> dfd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>open</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+        <td class="code"><span class="type"> umode_t</span> <span class="name"> mode</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>pause</td>
+      
+    </tr>
+  
+    <tr>
+      <td>personality</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> personality</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>pipe2</td>
+      
+        <td class="code"><span class="type"> int __user *</span> <span class="name"> fildes</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>pipe</td>
+      
+        <td class="code"><span class="type"> int __user *</span> <span class="name"> fildes</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>readahead</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> count</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>read</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> buf</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> count</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>rename</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> oldname</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> newname</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>restart_syscall</td>
+      
+    </tr>
+  
+    <tr>
+      <td>rmdir</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>rt_sigpending</td>
+      
+        <td class="code"><span class="type"> sigset_t __user *</span> <span class="name"> uset</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> sigsetsize</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>rt_sigsuspend</td>
+      
+        <td class="code"><span class="type"> compat_sigset_t __user *</span> <span class="name"> unewset</span></td>
+      
+        <td class="code"><span class="type"> compat_size_t</span> <span class="name"> sigsetsize</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>rt_sigsuspend</td>
+      
+        <td class="code"><span class="type"> sigset_t __user *</span> <span class="name"> unewset</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> sigsetsize</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sched_getparam</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> struct sched_param __user *</span> <span class="name"> param</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sched_get_priority_max</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> policy</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sched_get_priority_min</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> policy</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sched_getscheduler</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sched_setparam</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> struct sched_param __user *</span> <span class="name"> param</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sched_yield</td>
+      
+    </tr>
+  
+    <tr>
+      <td>semctl</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> semid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> semnum</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> cmd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> arg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>semctl</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> semid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> semnum</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> cmd</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> arg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>semget</td>
+      
+        <td class="code"><span class="type"> key_t</span> <span class="name"> key</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> nsems</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> semflg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sendfile64</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> out_fd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> in_fd</span></td>
+      
+        <td class="code"><span class="type"> loff_t __user *</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> count</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sendfile</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> out_fd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> in_fd</span></td>
+      
+        <td class="code"><span class="type"> off_t __user *</span> <span class="name"> offset</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> count</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sendmsg</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> struct msghdr __user *</span> <span class="name"> msg</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setdomainname</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> name</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setfsgid16</td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> gid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setfsgid</td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> gid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setfsuid16</td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> uid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setfsuid</td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> uid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setgid16</td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> gid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setgid</td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> gid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setgroups16</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> gidsetsize</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t __user *</span> <span class="name"> grouplist</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setgroups</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> gidsetsize</span></td>
+      
+        <td class="code"><span class="type"> gid_t __user *</span> <span class="name"> grouplist</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sethostname</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> name</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setns</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> nstype</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setpgid</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pgid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setpriority</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> which</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> who</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> niceval</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setregid16</td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> rgid</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> egid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setregid</td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> rgid</span></td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> egid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setresgid16</td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> rgid</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> egid</span></td>
+      
+        <td class="code"><span class="type"> old_gid_t</span> <span class="name"> sgid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setresgid</td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> rgid</span></td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> egid</span></td>
+      
+        <td class="code"><span class="type"> gid_t</span> <span class="name"> sgid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setresuid16</td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> ruid</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> euid</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> suid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setresuid</td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> ruid</span></td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> euid</span></td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> suid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setreuid16</td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> ruid</span></td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> euid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setreuid</td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> ruid</span></td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> euid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setrlimit</td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> resource</span></td>
+      
+        <td class="code"><span class="type"> struct rlimit __user *</span> <span class="name"> rlim</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setsid</td>
+      
+    </tr>
+  
+    <tr>
+      <td>set_tid_address</td>
+      
+        <td class="code"><span class="type"> int __user *</span> <span class="name"> tidptr</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setuid16</td>
+      
+        <td class="code"><span class="type"> old_uid_t</span> <span class="name"> uid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>setuid</td>
+      
+        <td class="code"><span class="type"> uid_t</span> <span class="name"> uid</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sgetmask</td>
+      
+    </tr>
+  
+    <tr>
+      <td>shmat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> shmid</span></td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> shmaddr</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> shmflg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>shmat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> shmid</span></td>
+      
+        <td class="code"><span class="type"> compat_uptr_t</span> <span class="name"> shmaddr</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> shmflg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>shmctl</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> shmid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> cmd</span></td>
+      
+        <td class="code"><span class="type"> struct shmid_ds __user *</span> <span class="name"> buf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>shmdt</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> shmaddr</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>shmget</td>
+      
+        <td class="code"><span class="type"> key_t</span> <span class="name"> key</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> size</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> shmflg</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>shutdown</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> how</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sigaltstack</td>
+      
+        <td class="code"><span class="type">const stack_t __user *</span> <span class="name">uss</span></td>
+      
+        <td class="code"><span class="type"> stack_t __user *</span> <span class="name">uoss</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>signal</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> sig</span></td>
+      
+        <td class="code"><span class="type"> __sighandler_t</span> <span class="name"> handler</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sigpending</td>
+      
+        <td class="code"><span class="type"> old_sigset_t __user *</span> <span class="name"> set</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sigsuspend</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> unused1</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> unused2</span></td>
+      
+        <td class="code"><span class="type"> old_sigset_t</span> <span class="name"> mask</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sigsuspend</td>
+      
+        <td class="code"><span class="type"> old_sigset_t</span> <span class="name"> mask</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>socketcall</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> call</span></td>
+      
+        <td class="code"><span class="type"> unsigned long __user *</span> <span class="name"> args</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>socket</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> family</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> type</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> protocol</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ssetmask</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> newmask</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>statfs64</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> sz</span></td>
+      
+        <td class="code"><span class="type"> struct statfs64 __user *</span> <span class="name"> buf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>statfs</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+        <td class="code"><span class="type"> struct statfs __user *</span> <span class="name"> buf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>stime</td>
+      
+        <td class="code"><span class="type"> time_t __user *</span> <span class="name"> tptr</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>swapoff</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> specialfile</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>swapon</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> specialfile</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> swap_flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>symlink</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> oldname</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> newname</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sync</td>
+      
+    </tr>
+  
+    <tr>
+      <td>syncfs</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fd</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sysctl</td>
+      
+        <td class="code"><span class="type"> struct compat_sysctl_args __user *</span> <span class="name"> args</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sysctl</td>
+      
+        <td class="code"><span class="type"> struct __sysctl_args __user *</span> <span class="name"> args</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sysfs</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> option</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> arg1</span></td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> arg2</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sysinfo</td>
+      
+        <td class="code"><span class="type"> struct compat_sysinfo __user *</span> <span class="name"> info</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>sysinfo</td>
+      
+        <td class="code"><span class="type"> struct sysinfo __user *</span> <span class="name"> info</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>syslog</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> type</span></td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> buf</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> len</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>tee</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fdin</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> fdout</span></td>
+      
+        <td class="code"><span class="type"> size_t</span> <span class="name"> len</span></td>
+      
+        <td class="code"><span class="type"> unsigned int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>tgkill</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> tgid</span></td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> sig</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>timer_delete</td>
+      
+        <td class="code"><span class="type"> timer_t</span> <span class="name"> timer_id</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>timerfd_create</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> clockid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>timerfd_gettime</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> ufd</span></td>
+      
+        <td class="code"><span class="type"> struct itimerspec __user *</span> <span class="name"> otmr</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>timer_getoverrun</td>
+      
+        <td class="code"><span class="type"> timer_t</span> <span class="name"> timer_id</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>times</td>
+      
+        <td class="code"><span class="type"> struct tms __user *</span> <span class="name"> tbuf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>time</td>
+      
+        <td class="code"><span class="type"> time_t __user *</span> <span class="name"> tloc</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>tkill</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> sig</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>truncate64</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> path</span></td>
+      
+        <td class="code"><span class="type"> loff_t</span> <span class="name"> length</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>truncate</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> path</span></td>
+      
+        <td class="code"><span class="type"> compat_off_t</span> <span class="name"> length</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>truncate</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> path</span></td>
+      
+        <td class="code"><span class="type"> long</span> <span class="name"> length</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>umask</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> mask</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>umount</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> name</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>uname</td>
+      
+        <td class="code"><span class="type"> struct old_utsname __user *</span> <span class="name"> name</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>unlinkat</td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> dfd</span></td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> flag</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>unlink</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> pathname</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>unshare</td>
+      
+        <td class="code"><span class="type"> unsigned long</span> <span class="name"> unshare_flags</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>uselib</td>
+      
+        <td class="code"><span class="type"> const char __user *</span> <span class="name"> library</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>ustat</td>
+      
+        <td class="code"><span class="type"> unsigned</span> <span class="name"> dev</span></td>
+      
+        <td class="code"><span class="type"> struct ustat __user *</span> <span class="name"> ubuf</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>utime</td>
+      
+        <td class="code"><span class="type"> char __user *</span> <span class="name"> filename</span></td>
+      
+        <td class="code"><span class="type"> struct utimbuf __user *</span> <span class="name"> times</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>vfork</td>
+      
+    </tr>
+  
+    <tr>
+      <td>vhangup</td>
+      
+    </tr>
+  
+    <tr>
+      <td>waitpid</td>
+      
+        <td class="code"><span class="type"> pid_t</span> <span class="name"> pid</span></td>
+      
+        <td class="code"><span class="type"> int __user *</span> <span class="name"> stat_addr</span></td>
+      
+        <td class="code"><span class="type"> int</span> <span class="name"> options</span></td>
+      
+    </tr>
+  
+</table>
+
+  </body>
+</html>

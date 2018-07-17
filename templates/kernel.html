@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Kernel {{ tag }}: syscalls{% endblock %}
+
+{% block content %}
+<h1>Kernel {{ tag }}: syscalls</h1>
+
+<table>
+  {% for syscall in syscalls %}
+    <tr>
+      <td>{{ syscall.name }}</td>
+      {% for arg in syscall.args %}
+        <td class="code"><span class="type">{{ arg.type }}</span> <span class="name">{{ arg.name }}</span></td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Syscalls{% endblock %}
+
+{% block content %}
+<h1>Syscalls by kernels</h1>
+
+<table>
+  {% for tag in tags %}
+    <tr>
+      <td><a href="/kernel-{{ tag }}.html">Kernel {{ tag }}</a></td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

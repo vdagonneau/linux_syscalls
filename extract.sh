@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KERNEL_GIT_URL='git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git'
-SYSCALL_REGEX='SYSCALL_DEFINE[0-9]{1}\(\K([^,)]+)'
+SYSCALL_REGEX='SYSCALL_DEFINE[0-9]{1}\(\K([^,)]+(\,[^,)]+)*)'
 KERNEL_EXCLUDES="--exclude-dir=arch --exclude-dir=include --exclude-dir=.git --exclude-dir=Documentation"
 
 if [ ! -d "linux" ]; then
@@ -17,12 +17,17 @@ cd linux
 ttxt="["
 tag_list=$(git tag --sort=v:refname | tac)
 for tag in ${tag_list}; do
-  ttxt="${ttxt}\"${tag}\","
+  if [[ ${tag} = *"rc"* ]]; then
+    echo "Version ${tag} is a release candidate; Skipping ..."
+    continue
+  fi
 
   if [ -f "../data/syscalls-${tag}.json" ]; then
     echo "Syscall data already present for version ${tag}; Skipping ..."
     continue
   fi
+
+  ttxt="${ttxt}\"${tag}\","
 
   echo "Checking out kernel sources for version ${tag}."
   git checkout ${tag}
@@ -31,13 +36,15 @@ for tag in ${tag_list}; do
   echo "Scanned kernel sources; Found $(echo "${syscalls}"|wc -l) uniq syscalls."
 
   stxt='['
-  for syscall in ${syscalls}; do
-    stxt="${stxt} \{ \"name\": \"${syscall}\" \},"
-  done
+  while read -r syscall; do
+    stxt="${stxt} { \"name\": \"${syscall}\" },"
+  done <<< "$syscalls"
+  stxt=${stxt::-1}
   stxt="${stxt}]"
 
-  echo "${stxt}" > ../data/syscalls-${tag}.json
+  echo "${stxt}" > ../site/data/syscalls-${tag}.json
 done
+ttxt=${ttxt::-1}
 ttxt="${ttxt}]"
 
-echo "${ttxt}" > ../data/tags.json
+echo "${ttxt}" > ../site/data/tags.json
